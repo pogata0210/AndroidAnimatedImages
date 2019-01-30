@@ -14,7 +14,7 @@ import android.widget.ImageView;
 import java.io.IOException;
 public class MainActivity extends AppCompatActivity {
     private ImageView ImageView;
-    private Button animatedButton;
+    boolean playing;
 
 
     @Override
@@ -22,15 +22,23 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ImageView = findViewById(R.id.animated_image_view);
-        animatedButton = findViewById(R.id.animated_button);
+
 
 
 //animated vector
 
         ImageView.setImageDrawable(getDrawable(R.drawable.avd_anim));
-        animatedButton.setOnClickListener(new View.OnClickListener() {
+        playing = false;
+        ImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(!playing) {
+                    ImageView.setImageDrawable(getDrawable(R.drawable.avd_anim));
+                    playing = true;
+                } else{
+                    ImageView.setImageDrawable(getDrawable(R.drawable.avd_anim));
+                    playing = false;
+                }
                 final Drawable drawable = ((ImageView).getDrawable());
                 if(drawable instanceof Animatable) {
 
