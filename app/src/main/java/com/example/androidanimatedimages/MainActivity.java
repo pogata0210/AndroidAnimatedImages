@@ -13,7 +13,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import java.io.IOException;
 public class MainActivity extends AppCompatActivity {
-    private ImageView ImageView;
+    private ImageView ImageView, ImageViewB;
     boolean playing;
 
 
@@ -22,27 +22,58 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ImageView = findViewById(R.id.animated_image_view);
-
+        ImageViewB = findViewById(R.id.animated_image_B);
 
 
 //animated vector
 
         ImageView.setImageDrawable(getDrawable(R.drawable.avd_anim));
         playing = false;
+        final Drawable drawable = (ImageView).getDrawable();
+        if (drawable instanceof Animatable) {
+            ((Animatable) drawable).start();
+        }
+
         ImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!playing) {
-                    ImageView.setImageDrawable(getDrawable(R.drawable.avd_anim));
+                if (!playing) {
+                    ImageView.setImageDrawable(getDrawable(R.drawable.avd_nomove));
                     playing = true;
-                } else{
+                } else {
                     ImageView.setImageDrawable(getDrawable(R.drawable.avd_anim));
                     playing = false;
                 }
-                final Drawable drawable = ((ImageView).getDrawable());
-                if(drawable instanceof Animatable) {
 
-                    ((Animatable)drawable).start();
+
+                final Drawable drawable = ImageView.getDrawable();
+                if (drawable instanceof Animatable) {
+                    ((Animatable) drawable).start();
+                }
+            }
+        });
+        ImageViewB.setImageDrawable(getDrawable(R.drawable.avd_nomove));
+        playing = false;
+        final Drawable drawableB = (ImageViewB).getDrawable();
+        if (drawableB instanceof Animatable) {
+            ((Animatable) drawableB).start();
+        }
+
+        ImageViewB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!playing) {
+                    ImageViewB.setImageDrawable(getDrawable(R.drawable.avd_anim));
+                    playing = true;
+                } else {
+                    ImageViewB.setImageDrawable(getDrawable(R.drawable.avd_nomove));
+                    playing = false;
+                }
+
+
+                final Drawable drawableB = ImageViewB.getDrawable();
+                if (drawableB instanceof Animatable) {
+                    ((Animatable) drawableB).start();
                 }
             }
         });
